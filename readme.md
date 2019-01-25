@@ -1,6 +1,6 @@
 # DevOps Toolkit
 
-Useful code examples and modules for Packer, Terraform, Ansible.
+Useful code examples and modules for Packer, Terraform, Ansible, etc.
 
 This code can be used free of charge in any projects.
 
