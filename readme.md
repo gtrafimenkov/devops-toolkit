@@ -2,14 +2,10 @@
 
 Useful code examples and modules for Packer, Terraform, Ansible.
 
-## Packer
+This code can be used free of charge in any projects.
 
-|Path|Description|
-|--|--|
-|[packer/upgraded-distr-images](./packer/upgraded-distr-images/readme.md)|Instructions for building upgraded AMI of distributions|
+## License
 
-## Terraform
+MIT License
 
-|Path|Description|
-|--|--|
-|[terraform/live/test-ami-dtk-u1804](./terraform/live/aws-test-ami-dtk-u1804/readme.md)|Create a test instance of upgraded Ubuntu 18.04 on AWS|
+Copyright (c) 2019 Gennady Trafimenkov
