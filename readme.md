@@ -2,7 +2,7 @@
 
 Useful code examples and modules for Packer, Terraform, Ansible, etc.
 
-This code can be used free of charge in any projects.
+This code can be used free of charge in any project.
 
 ## Bug reports
 
@@ -15,4 +15,5 @@ Are not welcome, because I want to retain copyright on all the code in this repo
 ## License
 
 MIT License
+
 Copyright (c) 2019 Gennady Trafimenkov
