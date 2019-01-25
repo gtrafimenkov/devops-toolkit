@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+- name: Add bazel release gpg key
+  apt_key: url=https://bazel.build/bazel-release.pub.gpg state=present
+  become: yes
+
+- name: Add bazel repository
+  apt_repository: repo="deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" state=present update_cache=yes
+  become: yes
+
+- name: Install packages
+  include: "../../common-tasks/install-packages.yml"
+  vars:
+    _packages:
+      - openjdk-8-jdk
+      - bazel

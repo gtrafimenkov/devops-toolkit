@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+- name: Enable https transport
+  apt: name={{item}} state=present update_cache=true cache_valid_time=3600
+  with_items:
+    - apt-transport-https
+  become: yes

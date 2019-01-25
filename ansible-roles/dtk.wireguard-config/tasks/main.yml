@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+- name: Create config directory
+  file: path=/etc/wireguard state=directory
+  become: yes
+
+- name: Create configuration files
+  copy: dest=/etc/wireguard/{{item.name}}.conf content={{item.config}} mode=0600
+  with_items: "{{wireguard|default([])}}"
+  notify: "Apply wireguard {{item.name}} settings"
+  become: yes
+
+- name: Configure /etc/network/interfaces
+  blockinfile:
+    path: /etc/network/interfaces
+    marker: "# {mark} WireGuard {{item.name}} ANSIBLE MANAGED BLOCK"
+    block: |
+      auto {{item.name}}
+      iface {{item.name}} inet static
+              address {{item.ip}}
+              netmask {{item.netmask}}
+              pre-up ip link add $IFACE type wireguard
+              pre-up wg setconf $IFACE /etc/wireguard/$IFACE.conf
+              post-down ip link del $IFACE
+      {% for line in item.network_interface_extra_settings|default([]) %}
+              {{line}}
+      {% endfor %}
+  with_items: "{{wireguard|default([])}}"
+  become: yes

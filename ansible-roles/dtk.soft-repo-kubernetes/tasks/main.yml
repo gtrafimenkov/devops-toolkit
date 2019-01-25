@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+- name: Add repository
+  apt_repository: repo="deb http://apt.kubernetes.io/ kubernetes-xenial main" state=present update_cache=yes
+  become: yes

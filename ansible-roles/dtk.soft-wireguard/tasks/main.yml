@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+- name: Add repository
+  apt_repository: repo="ppa:wireguard/wireguard" state=present update_cache=yes
+  become: yes
+
+- name: Install required packages
+  apt: name={{item}} state=present
+  with_items:
+    - libelf-dev
+  become: yes
+
+- name: Install packages
+  apt: name={{item}} state=present
+  with_items:
+    - wireguard
+  become: yes

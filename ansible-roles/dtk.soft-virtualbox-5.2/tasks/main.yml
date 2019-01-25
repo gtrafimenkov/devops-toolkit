@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+- name: Add key
+  apt_key: keyserver=keys.gnupg.net id=2980AECF state=present
+  become: yes
+
+- name: Add repository
+  apt_repository: repo="deb https://download.virtualbox.org/virtualbox/debian {{ansible_distribution_release}} contrib" state=present update_cache=yes
+  become: yes
+
+- name: Install requirements to build the kernel module
+  apt: name={{item}} state=present
+  with_items:
+    - libelf-dev
+  become: yes
+
+- name: Install packages
+  apt: name={{item}} state=present
+  with_items:
+    - virtualbox-5.2
+  become: yes

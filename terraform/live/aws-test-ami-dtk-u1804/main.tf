@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2019 Gennady Trafimenkov
+
 provider "aws" {
     region = "eu-central-1"
 }

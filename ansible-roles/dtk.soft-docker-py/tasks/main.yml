@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+# Install setup tools to avoid error:
+#   Collecting docker-py
+#     Using cached docker_py-1.10.6-py2.py3-none-any.whl
+#   Collecting requests!=2.11.0,>=2.5.2 (from docker-py)
+#     Using cached requests-2.18.4-py2.py3-none-any.whl
+#   Collecting backports.ssl-match-hostname>=3.5; python_version < "3.5" (from docker-py)
+#     Using cached backports.ssl_match_hostname-3.5.0.1.tar.gz
+#   Could not import setuptools which is required to install from a source distribution.
+#   Please install setuptools.
+
+- include: "../../common-tasks/install-packages.yml"
+  vars:
+    _packages:
+      - python-setuptools
+
+- name: Install docker-py pip module
+  pip: name=docker-py state=present
+  become: yes

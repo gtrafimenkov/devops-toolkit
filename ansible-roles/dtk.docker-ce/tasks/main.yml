@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+# https://docs.docker.com/install/linux/docker-ce/ubuntu/#set-up-the-repository
+
+- include: "../../common-tasks/install-packages.yml"
+  vars:
+    _packages:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+
+- name: Add Docker's official GPG key
+  apt_key: url=https://download.docker.com/linux/ubuntu/gpg id=0EBFCD88 state=present
+  become: yes
+
+- name: Add Docker's stable repository
+  apt_repository: repo="deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable" state=present update_cache=yes
+  become: yes
+
+- name: Create config folder
+  file: path=/etc/docker state=directory
+  become: yes
+
+- name: Copy docker daemon.json
+  template: src=daemon.json dest=/etc/docker/daemon.json
+  become: yes
+
+- include: "../../common-tasks/install-packages.yml"
+  vars:
+    _packages:
+      - docker-ce

@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+- include: "../../common-tasks/install-packages.yml"
+  vars:
+    _packages:
+      - python-pip
+
+# Update pip to the latest version to avoid error:
+#   Traceback (most recent call last):
+#     File "/usr/bin/pip2", line 5, in <module>
+#       from pkg_resources import load_entry_point
+#   ImportError: No module named pkg_resources
+
+- name: Update pip to the latest version
+  pip: name=pip state=latest
+  become: yes

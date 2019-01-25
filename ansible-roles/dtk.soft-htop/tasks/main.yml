@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+- name: Install packages
+  include: "{{inventory_dir}}/common-tasks/install-packages.yml"
+  vars:
+    _packages:
+      - htop
+  become: yes

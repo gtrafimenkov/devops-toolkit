@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+---
+
+- name: Apply wireguard wg0 settings
+  shell: "if ip link | grep ' wg0: '; then wg setconf wg0 /etc/wireguard/wg0.conf; fi"
+  become: yes
