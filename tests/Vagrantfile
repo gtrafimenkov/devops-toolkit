@@ -1,0 +1,46 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  {
+    "u1604"   => { image: "devops-toolkit/ubuntu1604",   ip: "192.168.73.22",  port: 7322,  ram:  768 },
+    "u1804"   => { image: "devops-toolkit/ubuntu1804",   ip: "192.168.73.23",  port: 7323,  ram:  768 },
+
+    "ct7"     => { image: "centos/7",                    ip: "192.168.73.43",  port: 7343,  ram:  768, disable_sync: true },
+  }.each do |short_name, params|
+    config.vm.define short_name do |instance|
+      instance.vm.box = params[:image]
+      instance.vm.hostname = "#{short_name}"
+      if params[:ip]
+        instance.vm.network "private_network", ip: params[:ip]
+      end
+      if params[:port]
+        instance.vm.network :forwarded_port, guest: 22, host: params[:port], id: 'ssh'
+      end
+
+      if params[:disable_sync]
+        instance.vm.synced_folder ".", "/vagrant", disabled: true
+      end
+
+      instance.vm.provider :virtualbox do |vb|
+        vb.gui = short_name.end_with?('v')
+        vb.memory = params[:ram] if params[:ram]
+      end
+    end
+  end
+
+  config.vm.box_check_update = false
+
+  config.ssh.forward_agent = true
+
+  # don't replace insecure ssh key inside the VM, so
+  # we can use ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key in the inventory file
+  config.ssh.insert_key = false
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = 2
+  end
+end

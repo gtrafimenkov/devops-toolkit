@@ -1,0 +1,5 @@
+*.retry
+*.tfstate.backup
+.vagrant
+ceph-n*-extra-disk.vdi
+ceph-deploy-ceph.log

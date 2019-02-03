@@ -1,0 +1,5 @@
+*.retry
+/ansible.cfg.dpkg-dist
+/ansible.cfg.dpkg-new
+/hosts.dpkg-dist
+/hosts.dpkg-new

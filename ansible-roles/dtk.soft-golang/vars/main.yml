@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+
+golang_packages:
+  "1.11.5":
+    x86_64:
+      package: go1.11.5.linux-amd64.tar.gz
+      url: https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz
+      checksum: ff54aafedff961eb94792487e827515da683d61a5f9482f668008832631e5d25
+      checksum_algo: sha256
+  "1.10.8":
+    x86_64:
+      package: go1.10.8.linux-amd64.tar.gz
+      url: https://dl.google.com/go/go1.10.8.linux-amd64.tar.gz
+      checksum: d8626fb6f9a3ab397d88c483b576be41fa81eefcec2fd18562c87626dbb3c39e
+      checksum_algo: sha256

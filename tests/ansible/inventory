@@ -1,0 +1,9 @@
+[vagrant-vms]
+u1604                                ansible_ssh_host=192.168.73.22
+u1804                                ansible_ssh_host=192.168.73.23
+ct7                                  ansible_ssh_host=192.168.73.43
+
+[vagrant-vms:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o IdentitiesOnly=yes -o CheckHostIP=no'
+ansible_ssh_user=vagrant
+ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key

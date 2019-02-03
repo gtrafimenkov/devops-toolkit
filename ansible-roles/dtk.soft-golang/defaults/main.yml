@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+
+golang_version: "1.11.5"
+
+# Where to install go binaries
+golang_install_dir: /usr/local
+
+# If true, add go binaries to PATH.
+# You might need to log out from your desktop environment and log back in for changes to take effect.
+golang_add_bin_to_path: true
