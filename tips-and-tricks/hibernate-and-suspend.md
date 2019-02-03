@@ -1,0 +1,4 @@
+```
+systemctl hibernate
+systemctl suspend
+```
