@@ -1,0 +1,11 @@
+---
+- hosts:
+    - default
+  roles:
+    - testrole
+  tasks:
+
+    - debug: msg="hello"
+
+    - copy: dest=/foo.txt content="hello there"
+      become: yes

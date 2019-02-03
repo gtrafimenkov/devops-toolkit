@@ -1,0 +1,47 @@
+{
+    "variables": {
+        "aws_region": "eu-central-1"
+    },
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "region": "{{user `aws_region`}}",
+            "source_ami_filter": {
+                "filters": {
+                    "virtualization-type": "hvm",
+                    "name": "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*",
+                    "root-device-type": "ebs"
+                },
+                "owners": [
+                    "099720109477"
+                ],
+                "most_recent": true
+            },
+            "instance_type": "t2.micro",
+            "ssh_username": "ubuntu",
+            "ami_name": "gtk-example-ansible-{{timestamp}}"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "./files/welcome.txt",
+            "destination": "/home/ubuntu/"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo apt-get update",
+                "sleep 4",
+                "sudo apt-get install -y python"
+            ]
+        },
+        {
+            "type": "ansible",
+            "ansible_env_vars": [
+                "ANSIBLE_ROLES_PATH={{user `ansible_roles_path` }}"
+            ],
+            "playbook_file": "./ansible/playbooks/example.yml"
+        }
+    ]
+}
