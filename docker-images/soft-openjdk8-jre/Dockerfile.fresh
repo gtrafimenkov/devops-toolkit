@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+FROM quay.io/gtrafimenkov/soft:u1604-latest
+
+RUN echo "==>" \
+  && apt-get update \
+  && apt-get install --no-install-recommends -y openjdk-8-jre-headless \
+  && apt-get clean && rm -rf /var/lib/apt/lists/* \
+  && echo "== done"

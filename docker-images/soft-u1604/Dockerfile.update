@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+FROM quay.io/gtrafimenkov/soft:u1604-latest
+
+RUN echo "== security updates" \
+  && apt-get update \
+  && apt-get install --no-install-recommends -y $(apt-get -s dist-upgrade | grep -i security | cut -f2 -d\ | sort | uniq) \
+  && apt-get clean && rm -rf /var/lib/apt/lists/* \
+  && echo "== done"
