@@ -12,4 +12,4 @@ MIT
 
 ---
 
-_This repository is a part of [devops-toolkit](https://github.com/gtrafimenkov/devops-toolkit)._
+_This repository is a part of [gtrafimenkov/devops-toolkit](https://github.com/gtrafimenkov/devops-toolkit)._
