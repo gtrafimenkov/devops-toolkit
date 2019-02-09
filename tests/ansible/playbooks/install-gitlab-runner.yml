@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+- hosts:
+    - u1804
+  roles:
+    - dtk.soft-gitlab-runner

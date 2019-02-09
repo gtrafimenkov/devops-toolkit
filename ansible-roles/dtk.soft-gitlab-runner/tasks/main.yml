@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+
+- name: Setup dependencies
+  apt:
+    package:
+      - apt-transport-https
+      - gnupg
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+
+- name: Add GitLab package signing key
+  apt_key:
+    url: https://packages.gitlab.com/runner/gitlab-runner/gpgkey
+    state: present
+  become: true
+
+- name: Add GitLab multirunner repository
+  apt_repository:
+    repo: "{{ gitlab_runner_deb_repo }}"
+    update_cache: true
+    state: present
+  become: true
+
+- name: Setup dependencies
+  apt:
+    package:
+      - gitlab-runner
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  become: true

@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+# We need a gitlab runner capable of building docker images.  There is
+# a number of options: https://docs.gitlab.com/ee/ci/docker/using_docker_build.html
+#
+# In this case we are using a shell executor.  The setup is described
+# here: https://github.com/gtrafimenkov/devops-toolkit/cicd/gitlabci/gitlabci.md
+
+stages:
+  - build
+  - test
+
+build:
+  tags:
+    - shell
+  stage: build
+  script: |
+    make build
+  artifacts:
+    expire_in: 2 weeks
+    paths:
+      - output
+test:
+  tags:
+    - shell
+  stage: test
+  script: make test
