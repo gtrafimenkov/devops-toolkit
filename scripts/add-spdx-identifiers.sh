@@ -27,3 +27,10 @@ for f in $(find $SD/../terraform -type f \( -name '*.tf' -o -name '*.tfvars' \) 
         sed -i '1s!^!// SPDX-License-Identifier: MIT\n// Copyright (c) 2019 Gennady Trafimenkov\n\n!' $f
     fi
 done
+
+# cicd
+for f in $(find $SD/../cicd -type f \( -name 'Makefile' -o -name '*.yml' \) -print); do
+    if ! grep -q "# SPDX-License-Identifier" $f; then
+        sed -i '1s!^!# SPDX-License-Identifier: MIT\n# Copyright (c) 2019 Gennady Trafimenkov\n\n!' $f
+    fi
+done

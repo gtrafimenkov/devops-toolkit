@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+image: ubuntu:18.04
+
+stages:
+  - build
+
+build:
+  stage: build
+  script: |
+    ./hello.sh
