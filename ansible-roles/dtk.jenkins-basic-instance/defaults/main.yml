@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+
+jenkins_home: "/var/lib/jenkins"
+
+# Space separated list of plugins to install on boot
+jenkins_plugins_installed_on_boot:
+  - build-timeout
+  - configuration-as-code
+  - configuration-as-code-support
+  - github-branch-source
+  - job-dsl
+  - timestamper
+  - workflow-aggregator
+  - ws-cleanup
+
+# Jenkins configuratin as code.
+# It will be placed to {{ jenkins_home }}/jenkins.yaml
+# https://plugins.jenkins.io/configuration-as-code
+jenkins_jcasc: ""
+
+# Example of jcasc:
+# jenkins_jcasc: |
+#   jobs:
+#   - script: >
+#       multibranchPipelineJob('example-cicd-simple-bash') {
+#           branchSources {
+#               git {
+#                   id = 'example-cicd-simple-bash'
+#                   remote('https://github.com/gtrafimenkov/example-cicd-simple-bash.git')
+#               }
+#           }
+#       }

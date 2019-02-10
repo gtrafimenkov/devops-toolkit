@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+- hosts:
+    - u1804
+  roles:
+    - dtk.jenkins-basic-instance
+  vars:
+    jenkins_jcasc: |
+      jobs:
+      - script: >
+          multibranchPipelineJob('example-cicd-simple-bash') {
+              branchSources {
+                  git {
+                      id = 'example-cicd-simple-bash'
+                      remote('https://github.com/gtrafimenkov/example-cicd-simple-bash.git')
+                  }
+              }
+          }
+  tasks:

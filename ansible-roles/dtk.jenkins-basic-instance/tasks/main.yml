@@ -1,0 +1,73 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+
+- name: Add Jenkins apt key
+  apt_key:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+    state: present
+  become: yes
+
+- name: Add Jenkins repository
+  apt_repository:
+    repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+    state: present
+    update_cache: yes
+  become: yes
+
+- name: Install required packages
+  apt:
+    package:
+      - openjdk-8-jre
+      - docker.io
+    update_cache: true
+    cache_valid_time: 3600
+    state: present
+  become: yes
+
+- name: Install Jenkins
+  apt:
+    package:
+      - jenkins
+    update_cache: true
+    cache_valid_time: 3600
+    state: present
+  become: yes
+
+- name: Allow Jenkins work with Docker
+  user: name="jenkins" groups="docker" append=yes state=present
+  become: true
+
+- name: Create init scripts directory
+  file:
+    path: "{{ jenkins_home }}/init.groovy.d"
+    state: directory
+    owner: jenkins
+    group: jenkins
+    mode: 0750
+  become: yes
+
+- name: Copy init scripts
+  template:
+    src: "{{ item }}"
+    dest: "{{ jenkins_home }}/init.groovy.d/{{ item }}"
+    owner: jenkins
+    group: jenkins
+    mode: 0640
+  with_items:
+    - install-plugins.groovy
+  notify:
+    - "Restart Jenkins"
+  become: yes
+
+- name: Setup configuration as code
+  copy:
+    content: "{{ jenkins_jcasc }}"
+    dest: "{{ jenkins_home }}//jenkins.yaml"
+    owner: jenkins
+    group: jenkins
+    mode: 0640
+  notify:
+    - "Restart Jenkins"
+  become: yes

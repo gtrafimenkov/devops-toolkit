@@ -6,10 +6,10 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   {
-    "u1604"   => { image: "devops-toolkit/ubuntu1604",   ip: "192.168.73.22",  port: 7322,  ram:  768 },
-    "u1804"   => { image: "devops-toolkit/ubuntu1804",   ip: "192.168.73.23",  port: 7323,  ram:  768 },
+    "u1604"   => { image: "devops-toolkit/ubuntu1604",   ip: "192.168.73.22",  port: 7322,  ram:  1024 },
+    "u1804"   => { image: "devops-toolkit/ubuntu1804",   ip: "192.168.73.23",  port: 7323,  ram:  1024 },
 
-    "ct7"     => { image: "centos/7",                    ip: "192.168.73.43",  port: 7343,  ram:  768, disable_sync: true },
+    "ct7"     => { image: "centos/7",                    ip: "192.168.73.43",  port: 7343,  ram:  1024, disable_sync: true },
   }.each do |short_name, params|
     config.vm.define short_name do |instance|
       instance.vm.box = params[:image]
