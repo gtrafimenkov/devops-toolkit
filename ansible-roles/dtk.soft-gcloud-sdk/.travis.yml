@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+language: python
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get -qq update
+  - pip install molecule
+  - pip install docker
+
+script:
+  - cd .. && ln -s ansible-role-dtk-soft-gcloud-sdk dtk.soft-gcloud-sdk && cd dtk.soft-gcloud-sdk && molecule test

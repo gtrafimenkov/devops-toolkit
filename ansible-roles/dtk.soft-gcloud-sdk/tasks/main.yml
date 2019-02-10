@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+
+- name: Install dependencies
+  apt:
+    package:
+      - gnupg
+    update_cache: true
+    cache_valid_time: 3600
+    state: present
+  become: true
+
+- name: Add gcloud apt key
+  apt_key: url=https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  become: true
+
+- name: Add gcloud repo
+  apt_repository: repo='deb http://packages.cloud.google.com/apt cloud-sdk-{{ansible_distribution_release}} main' state=present update_cache=true
+  become: true
+
+- name: Install Cloud SDK
+  apt:
+    package:
+      - google-cloud-sdk
+    update_cache: true
+    cache_valid_time: 3600
+    state: present
+  become: true

@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:latest
+    steps:
+      - run: pip install --user molecule
+      - run: pip install --user docker
+      - setup_remote_docker
+      - checkout
+      - run: cd .. && ln -s project dtk.soft-gcloud-sdk && cd dtk.soft-gcloud-sdk && PATH=$PATH:~/.local/bin molecule test

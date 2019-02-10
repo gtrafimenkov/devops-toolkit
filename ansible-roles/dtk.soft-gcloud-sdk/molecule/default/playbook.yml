@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2019 Gennady Trafimenkov
+
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: dtk.soft-gcloud-sdk
