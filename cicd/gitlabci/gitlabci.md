@@ -28,3 +28,15 @@ gitlab-runner register -n
 ```
 sudo usermod -aG docker gitlab-runner
 ```
+
+### Docker executor
+
+```
+sudo su -
+export CI_SERVER_URL=https://gitlab.com/
+export REGISTRATION_TOKEN=wppikrU1FA-RLxBWuQF2
+export RUNNER_EXECUTOR=docker
+export RUNNER_NAME=docker-executor
+export RUNNER_TAG_LIST=docker
+gitlab-runner register -n --docker-image ubuntu:18.04
+```
